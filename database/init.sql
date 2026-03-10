@@ -65,3 +65,48 @@ CREATE TABLE IF NOT EXISTS badges (
     description TEXT,
     earned_at TIMESTAMP DEFAULT NOW()
 );
+
+CREATE TABLE IF NOT EXISTS iot_devices (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    device_name VARCHAR(255) NOT NULL,
+    device_type VARCHAR(100) NOT NULL,
+    location VARCHAR(255),
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS iot_readings (
+    id SERIAL PRIMARY KEY,
+    device_id INTEGER REFERENCES iot_devices(id) ON DELETE CASCADE,
+    soil_moisture DECIMAL(5,2),
+    soil_temperature DECIMAL(5,2),
+    air_temperature DECIMAL(5,2),
+    air_humidity DECIMAL(5,2),
+    light_intensity DECIMAL(8,2),
+    soil_ph DECIMAL(4,2),
+    rainfall DECIMAL(6,2),
+    wind_speed DECIMAL(5,2),
+    recorded_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS iot_alerts (
+    id SERIAL PRIMARY KEY,
+    device_id INTEGER REFERENCES iot_devices(id) ON DELETE CASCADE,
+    alert_type VARCHAR(100) NOT NULL,
+    severity VARCHAR(20) NOT NULL,
+    message TEXT NOT NULL,
+    is_read BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS crop_recognition_logs (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    is_plant BOOLEAN NOT NULL,
+    plant_confidence DECIMAL(5,4),
+    predicted_crop VARCHAR(100),
+    crop_confidence DECIMAL(5,4),
+    image_features JSONB,
+    created_at TIMESTAMP DEFAULT NOW()
+);

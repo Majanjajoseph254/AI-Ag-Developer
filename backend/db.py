@@ -21,6 +21,21 @@ def execute_query(query, params=None):
         conn.close()
 
 
+def execute_returning(query, params=None):
+    conn = get_connection()
+    try:
+        cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+        cur.execute(query, params)
+        result = cur.fetchone()
+        conn.commit()
+        return result
+    except Exception as e:
+        conn.rollback()
+        raise e
+    finally:
+        conn.close()
+
+
 def fetch_one(query, params=None):
     conn = get_connection()
     try:

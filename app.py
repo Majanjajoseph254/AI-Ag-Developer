@@ -69,6 +69,7 @@ from frontend.pages.weather import show_weather
 from frontend.pages.chatbot import show_chatbot
 from frontend.pages.community import show_community
 from frontend.pages.soil_erosion import show_soil_erosion
+from frontend.pages.iot_dashboard import show_iot_dashboard
 from frontend.components.navbar import show_navbar
 
 if st.session_state["logged_in"] and st.session_state["user"]:
@@ -86,6 +87,8 @@ if st.session_state["logged_in"] and st.session_state["user"]:
         show_market()
     elif page == "Weather":
         show_weather()
+    elif page == "IoT Dashboard":
+        show_iot_dashboard()
     elif page == "Chatbot":
         show_chatbot()
     elif page == "Soil & Erosion":

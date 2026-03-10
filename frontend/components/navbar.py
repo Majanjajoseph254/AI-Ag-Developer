@@ -14,6 +14,7 @@ def show_navbar():
             ("🌱", "Crop Monitoring"),
             ("🛒", "Market"),
             ("🌤️", "Weather"),
+            ("📡", "IoT Dashboard"),
             ("🤖", "Chatbot"),
             ("🌍", "Soil & Erosion"),
             ("👥", "Community"),
