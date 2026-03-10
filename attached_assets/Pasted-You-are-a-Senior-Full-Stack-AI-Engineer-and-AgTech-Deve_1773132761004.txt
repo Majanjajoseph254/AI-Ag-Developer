@@ -1,0 +1,137 @@
+You are a Senior Full-Stack AI Engineer and AgTech Developer. Your task is to build a **complete agricultural app for Kenyan farmers** called "AgriShield AI" on Replit. The app should be fully functional, secure, and mobile-friendly. Generate **ready-to-use code, folder structure, and instructions** for deployment. Follow all the specifications below.
+
+1. **Project Setup**
+   - Use Python as the main language.
+   - Backend: FastAPI
+   - Frontend: Streamlit (with multi-page layout)
+   - Database: PostgreSQL or Supabase
+   - AI/ML: TensorFlow/Keras for crop disease detection
+   - Cloud Storage: Supabase Storage or AWS S3
+   - Authentication: JWT / Supabase Auth
+   - Deployment: Replit full-stack hosting
+
+2. **Folder Structure**
+   Create the following folder structure:
+   AgriShield/
+   ├─ backend/
+   │   ├─ main.py
+   │   ├─ routes/auth.py
+   │   ├─ routes/crops.py
+   │   ├─ routes/market.py
+   │   ├─ models/user.py
+   │   ├─ models/crop.py
+   │   ├─ models/market.py
+   │   ├─ utils/ai_disease.py
+   │   ├─ utils/weather.py
+   │   ├─ utils/db.py
+   │   └─ schemas/
+   │       ├─ user_schema.py
+   │       ├─ crop_schema.py
+   │       └─ market_schema.py
+   ├─ frontend/
+   │   ├─ streamlit_app.py
+   │   ├─ pages/login.py
+   │   ├─ pages/signup.py
+   │   ├─ pages/dashboard.py
+   │   ├─ pages/crop_diagnosis.py
+   │   ├─ pages/crop_monitoring.py
+   │   ├─ pages/market.py
+   │   ├─ components/navbar.py
+   │   └─ styles/main.css
+   ├─ database/
+   │   ├─ init.sql
+   │   └─ sample_data.sql
+   ├─ ai_models/
+   │   ├─ crop_disease_model.h5
+   │   └─ preprocessing.py
+   └─ requirements.txt
+
+3. **Features**
+
+**A. User Management**
+   - Sign up, login, forgot password, email verification
+   - Role-based: Farmer, Admin, Extension Officer
+   - JWT authentication or Supabase Auth integration
+
+**B. Crop Disease Detection**
+   - Upload photo or use camera (Streamlit camera_input)
+   - Pre-trained AI model predicts disease
+   - Display:
+     - Disease name
+     - Severity level
+     - Treatment suggestions
+     - Preventive measures
+   - Support multiple crops (maize, tomatoes, potatoes, wheat)
+
+**C. Crop Growth Monitoring**
+   - Farmers can log:
+     - Planting date
+     - Growth stage
+     - Fertilizer/pesticide usage
+   - Display graphs: line chart of growth stages, disease trends
+   - Optional: Predict yield using regression
+
+**D. Soil & Erosion Control**
+   - Input soil type and farm slope
+   - Suggest terracing, cover crops, and mulch
+   - Optional: Satellite imagery to detect erosion risk
+
+**E. Market Linkage**
+   - Show nearest markets using geolocation
+   - Real-time crop prices
+   - Farmers can post crops for sale
+   - Contact buyers directly
+
+**F. AI Chatbot**
+   - Chatbot integrated using OpenAI GPT API
+   - Answer agronomy questions
+   - Store chat history in DB
+   - Example queries:
+     - "How do I treat maize leaf blight?"
+     - "Which fertilizer is best for tomatoes in March?"
+
+**G. Weather & Flood Alerts**
+   - Fetch real-time weather using OpenWeatherMap API
+   - Notify farmers of heavy rain, floods, or pest outbreak
+
+**H. Extra Features**
+   - Community forum for farmers
+   - Gamification: badges for sustainable practices
+   - Optional: IoT or drone integration for large farms
+   - Offline mode: save inputs offline and sync later
+
+4. **Database Design**
+   - users(id, name, email, password_hash, role, created_at)
+   - crops(id, user_id, crop_name, growth_stage, disease_detected, treatment, photo_url, date_logged)
+   - market(id, crop_name, location, price_per_kg, contact_info, posted_at)
+   - chatbot_history(id, user_id, message, response, timestamp)
+
+5. **Frontend Design**
+   - Mobile-friendly Streamlit layout
+   - Tabs or sidebar:
+     - Dashboard
+     - Crop Diagnosis
+     - Crop Monitoring
+     - Market
+     - Chatbot
+   - Use Streamlit components for charts (Plotly, Altair)
+   - Custom CSS for modern UI
+
+6. **AI Integration**
+   - Provide placeholder code to load AI model for crop disease
+   - Include preprocessing steps for images
+   - Return top 3 predicted diseases with probabilities
+
+7. **Testing & Deployment**
+   - Include test data in `sample_data.sql`
+   - Run backend FastAPI server
+   - Connect Streamlit frontend to APIs
+   - Test on mobile and desktop
+   - Deploy fully on Replit
+
+8. **Additional Requirements**
+   - Well-commented code
+   - Include instructions in README.md for setup and running
+   - Code should be modular and scalable
+
+**Your task:** Generate **all necessary code, folder structure, database scripts, and placeholder AI model code** so that a developer can **copy everything into Replit** and have a working prototype of AgriShield AI.
