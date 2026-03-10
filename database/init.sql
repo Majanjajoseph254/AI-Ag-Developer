@@ -1,0 +1,67 @@
+CREATE TABLE IF NOT EXISTS users (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL,
+    role VARCHAR(50) DEFAULT 'farmer',
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS crops (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    crop_name VARCHAR(100) NOT NULL,
+    growth_stage VARCHAR(100),
+    disease_detected VARCHAR(255),
+    treatment TEXT,
+    photo_url TEXT,
+    date_logged TIMESTAMP DEFAULT NOW(),
+    planting_date DATE,
+    fertilizer_used VARCHAR(255),
+    pesticide_used VARCHAR(255),
+    notes TEXT
+);
+
+CREATE TABLE IF NOT EXISTS market (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    crop_name VARCHAR(100) NOT NULL,
+    location VARCHAR(255),
+    price_per_kg DECIMAL(10, 2),
+    contact_info VARCHAR(255),
+    description TEXT,
+    posted_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS chatbot_history (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    role VARCHAR(20) NOT NULL,
+    content TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS community_posts (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    title VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+    category VARCHAR(100) DEFAULT 'general',
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS community_replies (
+    id SERIAL PRIMARY KEY,
+    post_id INTEGER REFERENCES community_posts(id) ON DELETE CASCADE,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    content TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS badges (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    badge_name VARCHAR(100) NOT NULL,
+    description TEXT,
+    earned_at TIMESTAMP DEFAULT NOW()
+);
