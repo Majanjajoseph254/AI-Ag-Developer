@@ -30,3 +30,23 @@ def get_user_by_id(user_id):
     if user:
         return dict(user)
     return None
+
+
+def update_user_profile(user_id, name, email, phone=None, location=None, bio=None, role=None):
+    execute_query(
+        """UPDATE users SET name = %s, email = %s, phone = %s, location = %s, bio = %s, role = %s
+           WHERE id = %s""",
+        (name, email, phone, location, bio, role, user_id),
+    )
+    return get_user_by_id(user_id)
+
+
+def change_user_password(user_id, old_password, new_password):
+    user = fetch_one("SELECT password_hash FROM users WHERE id = %s", (user_id,))
+    if not user:
+        return False, "User not found."
+    if not verify_password(old_password, user["password_hash"]):
+        return False, "Current password is incorrect."
+    new_hash = hash_password(new_password)
+    execute_query("UPDATE users SET password_hash = %s WHERE id = %s", (new_hash, user_id))
+    return True, "Password updated successfully."
