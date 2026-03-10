@@ -19,28 +19,59 @@ def show_navbar():
 
         st.markdown("---")
 
-        pages = [
+        current_page = st.session_state.get("page", "Dashboard")
+
+        st.markdown("<p style='font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.6; margin-bottom: 0.25rem;'>Main</p>", unsafe_allow_html=True)
+        main_pages = [
             ("🏠", "Dashboard"),
             ("🔬", "Crop Diagnosis"),
             ("🌱", "Crop Monitoring"),
             ("🛒", "Market"),
             ("🌤️", "Weather"),
             ("📡", "IoT Dashboard"),
+        ]
+        for icon, page_name in main_pages:
+            is_active = current_page == page_name
+            if st.button(f"{icon}  {page_name}", use_container_width=True, key=f"nav_{page_name}", type="primary" if is_active else "secondary"):
+                st.session_state["page"] = page_name
+                st.rerun()
+
+        st.markdown("<p style='font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.6; margin: 0.75rem 0 0.25rem;'>Smart Farming</p>", unsafe_allow_html=True)
+        smart_pages = [
+            ("💧", "Smart Irrigation"),
+            ("🤖", "Robotics"),
+            ("🧬", "Biotech & AI"),
+            ("🌿", "Climate Smart"),
+            ("📈", "Crop Improvement"),
+        ]
+        for icon, page_name in smart_pages:
+            is_active = current_page == page_name
+            if st.button(f"{icon}  {page_name}", use_container_width=True, key=f"nav_{page_name}", type="primary" if is_active else "secondary"):
+                st.session_state["page"] = page_name
+                st.rerun()
+
+        st.markdown("<p style='font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.6; margin: 0.75rem 0 0.25rem;'>Operations</p>", unsafe_allow_html=True)
+        ops_pages = [
+            ("🔗", "Blockchain"),
+            ("📦", "Supply Chain"),
+            ("👷", "Labour"),
+            ("♻️", "Sustainability"),
+        ]
+        for icon, page_name in ops_pages:
+            is_active = current_page == page_name
+            if st.button(f"{icon}  {page_name}", use_container_width=True, key=f"nav_{page_name}", type="primary" if is_active else "secondary"):
+                st.session_state["page"] = page_name
+                st.rerun()
+
+        st.markdown("<p style='font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.6; margin: 0.75rem 0 0.25rem;'>Community</p>", unsafe_allow_html=True)
+        community_pages = [
             ("🤖", "Chatbot"),
             ("🌍", "Soil & Erosion"),
             ("👥", "Community"),
         ]
-
-        current_page = st.session_state.get("page", "Dashboard")
-
-        for icon, page_name in pages:
+        for icon, page_name in community_pages:
             is_active = current_page == page_name
-            if st.button(
-                f"{icon}  {page_name}",
-                use_container_width=True,
-                key=f"nav_{page_name}",
-                type="primary" if is_active else "secondary",
-            ):
+            if st.button(f"{icon}  {page_name}", use_container_width=True, key=f"nav_{page_name}", type="primary" if is_active else "secondary"):
                 st.session_state["page"] = page_name
                 st.rerun()
 
